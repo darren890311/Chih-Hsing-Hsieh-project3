@@ -10,9 +10,15 @@ const User = require("./models/user");
 const app = express();
 const PORT = process.env.PORT || 5001;
 const SECRET_KEY = process.env.SECRET_KEY;
-
-app.use(cors());
 app.use(express.json());
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: ["https://chih-hsing-hsieh-project3.onrender.com"],
+    credentials: true,
+  })
+);
 
 mongoose.set("strictQuery", false);
 mongoose
