@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:5001/api";
+const BASE_URL = "https://chih-hsing-hsieh-project3-backend.onrender.com";
 
 const setupInterceptors = () => {
   axios.interceptors.request.use(
