@@ -9,4 +9,12 @@ export default defineConfig({
       "/api": "http://localhost:5001",
     },
   },
+  build: {
+    outDir: "dist",
+  },
+  resolve: {
+    alias: {
+      "@": "/src",
+    },
+  },
 });

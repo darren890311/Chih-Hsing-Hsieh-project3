@@ -4,22 +4,38 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Post = require("./models/post");
-const User = require("./models/user");
+const Post = require("./backend/models/post");
+const User = require("./backend/models/user");
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 const SECRET_KEY = process.env.SECRET_KEY;
-
-app.use(cors());
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://chih-hsing-hsieh-project3.onrender.com"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
+
+app.use(
+  cors({
+    origin: ["https://chih-hsing-hsieh-project3.onrender.com"],
+    credentials: true,
+  })
+);
 
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGODB_URI, {})
   .then(() => {
     console.log("MongoDB Connected");
     console.log("Database URI:", process.env.MONGODB_URI);
