@@ -33,6 +33,20 @@ app.use(
   })
 );
 
+app.options("*", (req, res) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://chih-hsing-hsieh-project3.onrender.com"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.sendStatus(200);
+});
+
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGODB_URI, {})
